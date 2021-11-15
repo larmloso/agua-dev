@@ -3,24 +3,13 @@ import { Modal, Col, Row, Divider, Input, Form, Button, Select } from 'antd'
 import { InsertProducts, FetchAllMember } from '../../services'
 
 //imort google maps
-// import {
-//   InfoWindow,
-//   withScriptjs,
-//   withGoogleMap,
-//   GoogleMap,
-//   Marker,
-// } from "react-google-maps";
-import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
-
-const containerStyle = {
-  width: '400px',
-  height: '400px'
-};
-
-const center = {
-  lat: -3.745,
-  lng: -38.523
-};
+import {
+  InfoWindow,
+  withScriptjs,
+  withGoogleMap,
+  GoogleMap,
+  Marker,
+} from "react-google-maps";
 
 export default function AddNewUser({ open, toggleSidebar }) {
   const { Option } = Select
@@ -52,56 +41,38 @@ export default function AddNewUser({ open, toggleSidebar }) {
     getAllemp()
   }, [])
 
-  const { isLoaded } = useJsApiLoader({
-    id: 'google-map-script',
-    googleMapsApiKey: "AIzaSyBYQsoMGSxKVOe6vilIiEedgPhRDjcPbC8&v=3.exp&libraries=geometry,drawing,places"
-  })
-
-  const [map, setMap] = React.useState(null)
-
-  const onLoad = React.useCallback(function callback(map) {
-    const bounds = new window.google.maps.LatLngBounds();
-    map.fitBounds(bounds);
-    setMap(map)
-  }, [])
-
-  const onUnmount = React.useCallback(function callback(map) {
-    setMap(null)
-  }, [])
 
 
+  const onMarkerDragEnd = (event) => {
+    let newLat = event.latLng.lat();
+    let newLng = event.latLng.lng();
+    console.log('newLat', newLat, 'newLng', newLng)
+  };
 
 
-  // const onMarkerDragEnd = (event) => {
-  //   let newLat = event.latLng.lat();
-  //   let newLng = event.latLng.lng();
-  //   console.log('newLat', newLat, 'newLng', newLng)
-  // };
-
-
-  // const MapWithAMarker = withScriptjs(
-  //   withGoogleMap((props) => (
-  //     <GoogleMap
-  //       defaultZoom={15}
-  //       defaultCenter={{ lat: 15.117343048873208, lng: 104.90303147301957 }} //15.117343048873208, 104.90303147301957
-  //     >
-  //       <Marker
-  //         draggable={true}
-  //         onDragEnd={onMarkerDragEnd()}
-  //         position={{ lat: 15.117343048873208, lng: 104.90303147301957 }}
-  //       >
-  //         <InfoWindow>
-  //           <div>test</div>
-  //         </InfoWindow>
-  //       </Marker>
-  //     </GoogleMap>
-  //   ))
-  // );
+  const MapWithAMarker = withScriptjs(
+    withGoogleMap((props) => (
+      <GoogleMap
+        defaultZoom={15}
+        defaultCenter={{ lat: 15.117343048873208, lng: 104.90303147301957 }} //15.117343048873208, 104.90303147301957
+      >
+        <Marker
+          draggable={true}
+          onDragEnd={onMarkerDragEnd()}
+          position={{ lat: 15.117343048873208, lng: 104.90303147301957 }}
+        >
+          <InfoWindow>
+            <div>test</div>
+          </InfoWindow>
+        </Marker>
+      </GoogleMap>
+    ))
+  );
   
 
 
 
-  return isLoaded ? (
+  return (
 
     <Modal
       title="Add Contact"
@@ -167,39 +138,18 @@ export default function AddNewUser({ open, toggleSidebar }) {
                 <Option value="113252534536">fuseter</Option>
                 <Option value="inactive">fuseter2</Option>
                 <Option value="pending">fuseter3</Option>
-                <Option value="pending">fuseter4</Option>
               </Select>
             </Form.Item>
           </Col>
 
           
           <Col md={24} span={24}>
-          {/* <MapWithAMarker
+          <MapWithAMarker
               googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyBYQsoMGSxKVOe6vilIiEedgPhRDjcPbC8&v=3.exp&libraries=geometry,drawing,places"
               loadingElement={<div style={{ height: '100%' }} />}
               containerElement={<div style={{ height: '400px', width: '400px',  }} />}
               mapElement={<div style={{ height: '100%' }} />}
-            /> */}
-
-        <GoogleMap
-        mapContainerStyle={containerStyle}
-        center={center}
-        zoom={10}
-        onLoad={onLoad}
-        onUnmount={onUnmount}
-      >
-        <></>
-      </GoogleMap>
-          </Col>
-
-          <Col md={12} span={24}>
-            <Form.Item
-              name="customer_name"
-              label="ชื่อลูกค้า 2"
-              rules={[{ required: true, message: 'This is required!' }]}
-            >
-              <Input />
-            </Form.Item>
+            />
           </Col>
 
           
@@ -213,7 +163,7 @@ export default function AddNewUser({ open, toggleSidebar }) {
         </Row>
       </Form>
     </Modal>
-  ) : <></>
+  )
 }
 
 
