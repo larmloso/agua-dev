@@ -2,33 +2,24 @@ import React, { useEffect, useState } from 'react'
 import { Modal, Col, Row, Divider, Input, Form, Button, Select } from 'antd'
 import { InsertProducts, FetchAllMember } from '../../services'
 
-import { longdo, map, LongdoMap } from './LongdoMap'
 
+import {
+  withScriptjs,
+  withGoogleMap,
+  GoogleMap,
+  Marker,
+} from "react-google-maps";
 
-//imort google maps
-// import {
-//   InfoWindow,
-//   withScriptjs,
-//   withGoogleMap,
-//   GoogleMap,
-//   Marker,
-// } from "react-google-maps";
-
-// import { GoogleMap, LoadScript } from '@react-google-maps/api'
-
-// const containerStyle = {
-//   width: '400px',
-//   height: '400px',
-// }
-
-// const center = {
-//   lat: -3.745,
-//   lng: -38.523,
-// }
-
-function initMap(){
-  map.Layers.setBase(longdo.Layers.GRAY);
-}
+const MapWithAMarker = withScriptjs(withGoogleMap(props =>
+  <GoogleMap
+    defaultZoom={8}
+    defaultCenter={{ lat: -34.397, lng: 150.644 }}
+  >
+    <Marker
+      position={{ lat: -34.397, lng: 150.644 }}
+    />
+  </GoogleMap>
+));
 
 export default function AddNewUser({ open, toggleSidebar }) {
 
@@ -90,6 +81,7 @@ export default function AddNewUser({ open, toggleSidebar }) {
   //     </GoogleMap>
   //   ))
   // );
+
 
   return (
     <Modal
@@ -161,14 +153,12 @@ export default function AddNewUser({ open, toggleSidebar }) {
           </Col>
 
           <Col md={24} span={24}>
-            {/* <MapWithAMarker
+            <MapWithAMarker
               googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyBYQsoMGSxKVOe6vilIiEedgPhRDjcPbC8&v=3.exp&libraries=geometry,drawing,places"
               loadingElement={<div style={{ height: '100%' }} />}
               containerElement={<div style={{ height: '400px', width: '400px',  }} />}
               mapElement={<div style={{ height: '100%' }} />}
-            /> */}
-
-          <LongdoMap id="longdo-map" mapKey={mapKey} callback={initMap()} />
+            />
 
           </Col>
 
