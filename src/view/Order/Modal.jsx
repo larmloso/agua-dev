@@ -8,32 +8,32 @@ import {
   withGoogleMap,
   GoogleMap,
   Marker,
-} from "react-google-maps";
+} from 'react-google-maps'
 
-let newLat = 0;
-let newLng = 0;
+let newLatLng = [{ lat: 15.118524429823255, lng: 104.9075726928711 }]
+// let newLat = 0
+// let newLng = 0
 
 const onMarkerDragEnd = (event) => {
-  lat = event.latLng.lat();
-  lng = event.latLng.lng();
+  lat = event.latLng.lat()
+  lng = event.latLng.lng()
   console.log('newLat', newLat, 'newLng', newLng)
-};
+}
 
-
-
-
-const MapWithAMarker = withScriptjs(withGoogleMap(props =>
-  <GoogleMap
-    defaultZoom={8}
-    defaultCenter={{ lat: 15.118524429823255 , lng: 104.9075726928711 }}
-  >
-    <Marker
-      draggable={true}
-      position={{ lat: 15.118524429823255, lng: 104.9075726928711 }}
-      onDragEnd={(e) => onMarkerDragEnd(e)}
-    />
-  </GoogleMap>
-));
+const MapWithAMarker = withScriptjs(
+  withGoogleMap((props) => (
+    <GoogleMap
+      defaultZoom={8}
+      defaultCenter={newLatLng[0]}
+    >
+      <Marker
+        draggable={true}
+        position={newLatLng[0]}
+        onDragEnd={(e) => onMarkerDragEnd(e)}
+      />
+    </GoogleMap>
+  ))
+)
 
 export default function AddNewUser({ open, toggleSidebar }) {
   const { Option } = Select
@@ -47,8 +47,8 @@ export default function AddNewUser({ open, toggleSidebar }) {
       product_info: values.product_info,
       status: 'waite',
       member_id: values.member_id,
-      lat: newLat,
-      long: newLng,
+      lat: newLatLng[0].lat,
+      long: newLatLng[0].lng
     }
     InsertProducts(data).then(() => toggleSidebar())
   }
@@ -65,10 +65,7 @@ export default function AddNewUser({ open, toggleSidebar }) {
     getAllemp()
   }, [])
 
-
-
   return (
-
     <Modal
       title="Add Contact"
       visible={open}
@@ -137,17 +134,14 @@ export default function AddNewUser({ open, toggleSidebar }) {
             </Form.Item>
           </Col>
 
-          
           <Col md={24} span={24}>
-          <MapWithAMarker
+            <MapWithAMarker
               googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyBKBdBAnDzrOkcfHq9InQFfYM7Inig-Zeg&v=3.exp&libraries=geometry,drawing,places"
               loadingElement={<div style={{ height: '100%' }} />}
-              // containerElement={<div style={{ height: '400px', width: '400px',  }} />}
+              containerElement={<div style={{ height: '400px', width: '400px',  }} />}
               mapElement={<div style={{ height: '100%' }} />}
             />
           </Col>
-
-          
 
           <Divider />
           <Col span={24}>
@@ -160,5 +154,3 @@ export default function AddNewUser({ open, toggleSidebar }) {
     </Modal>
   )
 }
-
-
