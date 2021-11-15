@@ -45,6 +45,8 @@ function App() {
           userName: profile.displayName,
         }
 
+        console.log('-------profile-------,', profile)
+
         sendToken(data).then(response => Cookies.set('access-token',response.data['token'], { expires: 7 }))
         setTimeout(() => {
           window.location.href = '/Dashboard'
