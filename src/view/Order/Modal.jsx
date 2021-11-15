@@ -167,6 +167,7 @@ export default function AddNewUser({ open, toggleSidebar }) {
                 <Option value="113252534536">fuseter</Option>
                 <Option value="inactive">fuseter2</Option>
                 <Option value="pending">fuseter3</Option>
+                <Option value="pending">fuseter4</Option>
               </Select>
             </Form.Item>
           </Col>
