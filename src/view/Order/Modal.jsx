@@ -26,7 +26,8 @@ const onMarkerDragEnd = (event) => {
 //     >
 //       <Marker
 //         draggable={true}
-//         onDragEnd={onMarkerDragEnd()}
+//         //onDragEnd={onMarkerDragEnd()}
+//         onDragEnd={(e) => {console.log('dragEnd', e.nativeEvent.coordinate)}}
 //         position={{ lat: 15.117343048873208, lng: 104.90303147301957 }}
 //       >
 //         <InfoWindow>
@@ -43,7 +44,9 @@ const MapWithAMarker = withScriptjs(withGoogleMap(props =>
     defaultCenter={{ lat: -34.397, lng: 150.644 }}
   >
     <Marker
+      draggable={true}
       position={{ lat: -34.397, lng: 150.644 }}
+      onDragEnd={(e) => {console.log('dragEnd', e.nativeEvent.coordinate)}}
     />
   </GoogleMap>
 ));
