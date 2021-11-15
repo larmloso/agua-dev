@@ -18,24 +18,35 @@ const onMarkerDragEnd = (event) => {
 };
 
 
-const MapWithAMarker = withScriptjs(
-  withGoogleMap((props) => (
-    <GoogleMap
-      defaultZoom={15}
-      defaultCenter={{ lat: 15.117343048873208, lng: 104.90303147301957 }} //15.117343048873208, 104.90303147301957
-    >
-      <Marker
-        draggable={true}
-        onDragEnd={onMarkerDragEnd()}
-        position={{ lat: 15.117343048873208, lng: 104.90303147301957 }}
-      >
-        <InfoWindow>
-          <div>test</div>
-        </InfoWindow>
-      </Marker>
-    </GoogleMap>
-  ))
-);
+// const MapWithAMarker = withScriptjs(
+//   withGoogleMap((props) => (
+//     <GoogleMap
+//       defaultZoom={15}
+//       defaultCenter={{ lat: 15.117343048873208, lng: 104.90303147301957 }} //15.117343048873208, 104.90303147301957
+//     >
+//       <Marker
+//         draggable={true}
+//         onDragEnd={onMarkerDragEnd()}
+//         position={{ lat: 15.117343048873208, lng: 104.90303147301957 }}
+//       >
+//         <InfoWindow>
+//           <div>test</div>
+//         </InfoWindow>
+//       </Marker>
+//     </GoogleMap>
+//   ))
+// );
+
+const MapWithAMarker = withScriptjs(withGoogleMap(props =>
+  <GoogleMap
+    defaultZoom={8}
+    defaultCenter={{ lat: -34.397, lng: 150.644 }}
+  >
+    <Marker
+      position={{ lat: -34.397, lng: 150.644 }}
+    />
+  </GoogleMap>
+));
 
 export default function AddNewUser({ open, toggleSidebar }) {
   const { Option } = Select
