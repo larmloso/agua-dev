@@ -2,27 +2,42 @@ import React, { useEffect, useState } from 'react'
 import { Modal, Col, Row, Divider, Input, Form, Button, Select } from 'antd'
 import { InsertProducts, FetchAllMember } from '../../services'
 
-
+//imort google maps
 import {
+  InfoWindow,
   withScriptjs,
   withGoogleMap,
   GoogleMap,
   Marker,
 } from "react-google-maps";
 
-const MapWithAMarker = withScriptjs(withGoogleMap(props =>
-  <GoogleMap
-    defaultZoom={8}
-    defaultCenter={{ lat: -34.397, lng: 150.644 }}
-  >
-    <Marker
-      position={{ lat: -34.397, lng: 150.644 }}
-    />
-  </GoogleMap>
-));
+const onMarkerDragEnd = (event) => {
+  let newLat = event.latLng.lat();
+  let newLng = event.latLng.lng();
+  console.log('newLat', newLat, 'newLng', newLng)
+};
+
+
+const MapWithAMarker = withScriptjs(
+  withGoogleMap((props) => (
+    <GoogleMap
+      defaultZoom={15}
+      defaultCenter={{ lat: 15.117343048873208, lng: 104.90303147301957 }} //15.117343048873208, 104.90303147301957
+    >
+      <Marker
+        draggable={true}
+        onDragEnd={onMarkerDragEnd()}
+        position={{ lat: 15.117343048873208, lng: 104.90303147301957 }}
+      >
+        <InfoWindow>
+          <div>test</div>
+        </InfoWindow>
+      </Marker>
+    </GoogleMap>
+  ))
+);
 
 export default function AddNewUser({ open, toggleSidebar }) {
-
   const { Option } = Select
   const [Alluser, setAlluser] = useState([])
 
@@ -54,36 +69,8 @@ export default function AddNewUser({ open, toggleSidebar }) {
 
 
 
-  const mapKey = 'AIzaSyBYQsoMGSxKVOe6vilIiEedgPhRDjcPbC8'
-
-
-  // const onMarkerDragEnd = (event) => {
-  //   let newLat = event.latLng.lat();
-  //   let newLng = event.latLng.lng();
-  //   console.log('newLat', newLat, 'newLng', newLng)
-  // };
-
-  // const MapWithAMarker = withScriptjs(
-  //   withGoogleMap((props) => (
-  //     <GoogleMap
-  //       defaultZoom={15}
-  //       defaultCenter={{ lat: 15.117343048873208, lng: 104.90303147301957 }} //15.117343048873208, 104.90303147301957
-  //     >
-  //       <Marker
-  //         draggable={true}
-  //         onDragEnd={onMarkerDragEnd()}
-  //         position={{ lat: 15.117343048873208, lng: 104.90303147301957 }}
-  //       >
-  //         <InfoWindow>
-  //           <div>test</div>
-  //         </InfoWindow>
-  //       </Marker>
-  //     </GoogleMap>
-  //   ))
-  // );
-
-
   return (
+
     <Modal
       title="Add Contact"
       visible={open}
@@ -152,15 +139,17 @@ export default function AddNewUser({ open, toggleSidebar }) {
             </Form.Item>
           </Col>
 
+          
           <Col md={24} span={24}>
-            <MapWithAMarker
+          <MapWithAMarker
               googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyBKBdBAnDzrOkcfHq9InQFfYM7Inig-Zeg&v=3.exp&libraries=geometry,drawing,places"
               loadingElement={<div style={{ height: '100%' }} />}
               containerElement={<div style={{ height: '400px', width: '400px',  }} />}
               mapElement={<div style={{ height: '100%' }} />}
             />
-
           </Col>
+
+          
 
           <Divider />
           <Col span={24}>
@@ -173,3 +162,5 @@ export default function AddNewUser({ open, toggleSidebar }) {
     </Modal>
   )
 }
+
+
