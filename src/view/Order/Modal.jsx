@@ -15,9 +15,9 @@ let newLatLng = [{ lat: 15.118524429823255, lng: 104.9075726928711 }]
 // let newLng = 0
 
 const onMarkerDragEnd = (event) => {
-  lat = event.latLng.lat()
-  lng = event.latLng.lng()
-  console.log('newLat', newLat, 'newLng', newLng)
+  newLatLng[0].lat = event.latLng.lat()
+  newLatLng[0].lng = event.latLng.lng()
+  console.log('newLat', newLatLng[0].lat, 'newLng', newLatLng[0].lng)
 }
 
 const MapWithAMarker = withScriptjs(
