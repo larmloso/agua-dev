@@ -10,9 +10,8 @@ import {
   Marker,
 } from 'react-google-maps'
 
+// default lat,lng
 let newLatLng = [{ lat: 15.118524429823255, lng: 104.9075726928711 }]
-// let newLat = 0
-// let newLng = 0
 
 const onMarkerDragEnd = (event) => {
   newLatLng[0].lat = event.latLng.lat()
@@ -138,7 +137,7 @@ export default function AddNewUser({ open, toggleSidebar }) {
             <MapWithAMarker
               googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyBKBdBAnDzrOkcfHq9InQFfYM7Inig-Zeg&v=3.exp&libraries=geometry,drawing,places"
               loadingElement={<div style={{ height: '100%' }} />}
-              containerElement={<div style={{ height: '400px', width: '400px',  }} />}
+              containerElement={<div style={{ height: '400px' }} />}
               mapElement={<div style={{ height: '100%' }} />}
             />
           </Col>
