@@ -191,6 +191,16 @@ export default function AddNewUser({ open, toggleSidebar }) {
       </GoogleMap>
           </Col>
 
+          <Col md={12} span={24}>
+            <Form.Item
+              name="customer_name"
+              label="ชื่อลูกค้า 2"
+              rules={[{ required: true, message: 'This is required!' }]}
+            >
+              <Input />
+            </Form.Item>
+          </Col>
+
           
 
           <Divider />
