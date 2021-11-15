@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { Modal, Col, Row, Divider, Input, Form, Button, Select } from 'antd'
 import { InsertProducts, FetchAllMember } from '../../services'
 
+import { longdo, map, LongdoMap } from './LongdoMap'
+
+
 //imort google maps
 // import {
 //   InfoWindow,
@@ -11,19 +14,24 @@ import { InsertProducts, FetchAllMember } from '../../services'
 //   Marker,
 // } from "react-google-maps";
 
-import { GoogleMap, LoadScript } from '@react-google-maps/api'
+// import { GoogleMap, LoadScript } from '@react-google-maps/api'
 
-const containerStyle = {
-  width: '400px',
-  height: '400px',
-}
+// const containerStyle = {
+//   width: '400px',
+//   height: '400px',
+// }
 
-const center = {
-  lat: -3.745,
-  lng: -38.523,
+// const center = {
+//   lat: -3.745,
+//   lng: -38.523,
+// }
+
+function initMap(){
+  map.Layers.setBase(longdo.Layers.GRAY);
 }
 
 export default function AddNewUser({ open, toggleSidebar }) {
+
   const { Option } = Select
   const [Alluser, setAlluser] = useState([])
 
@@ -52,6 +60,11 @@ export default function AddNewUser({ open, toggleSidebar }) {
     }
     getAllemp()
   }, [])
+
+
+
+  const mapKey = 'AIzaSyBYQsoMGSxKVOe6vilIiEedgPhRDjcPbC8'
+
 
   // const onMarkerDragEnd = (event) => {
   //   let newLat = event.latLng.lat();
@@ -155,16 +168,8 @@ export default function AddNewUser({ open, toggleSidebar }) {
               mapElement={<div style={{ height: '100%' }} />}
             /> */}
 
-            <LoadScript googleMapsApiKey="AIzaSyBYQsoMGSxKVOe6vilIiEedgPhRDjcPbC8">
-              <GoogleMap
-                mapContainerStyle={containerStyle}
-                center={center}
-                zoom={10}
-              >
-                {/* Child components, such as markers, info windows, etc. */}
-                <></>
-              </GoogleMap>
-            </LoadScript>
+          <LongdoMap id="longdo-map" mapKey={mapKey} callback={initMap()} />
+
           </Col>
 
           <Divider />
