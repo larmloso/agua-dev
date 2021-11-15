@@ -46,7 +46,7 @@ const MapWithAMarker = withScriptjs(withGoogleMap(props =>
     <Marker
       draggable={true}
       position={{ lat: -34.397, lng: 150.644 }}
-      onDragEnd={(e) => {console.log('dragEnd', e.nativeEvent.coordinate)}}
+      onDragEnd={(e) => {console.log('dragEnd', e)}}
     />
   </GoogleMap>
 ));
