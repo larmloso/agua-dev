@@ -21,8 +21,10 @@ function App() {
       { liffId: '1656614868-YEEVP66L' },
       () => {
         if (liff.isLoggedIn()) {
+          console.log('----1')
           runApp()
         } else {
+          console.log('----2')
           liff.login()
         }
       },
