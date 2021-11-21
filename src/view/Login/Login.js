@@ -56,8 +56,8 @@ function App() {
   }
 
   useEffect(() => {
-    //initLine()
-    window.location.href = '/Dashboard'
+    initLine()
+    //window.location.href = '/Dashboard'
   }, [])
 
   return (
